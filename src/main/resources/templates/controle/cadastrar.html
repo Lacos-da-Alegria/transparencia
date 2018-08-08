@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt" data-textdirection="ltr" class="loading">
+
+<head th:include="fragments/head :: content"> </head>
+
+<body data-open="click" data-menu="vertical-menu" data-col="2-columns" class="nav-collapsed menu-collapsed vertical-layout vertical-menu 2-columns fixed-navbar">
+
+<nav th:replace="fragments/nav :: content"></nav>
+
+<nav th:replace="fragments/menu :: content"></nav>
+
+    <div class="app-content content container-fluid">
+      <div class="content-wrapper">
+        <div class="content-header row">
+          <div class="content-header-left col-md-6 col-xs-12 mb-1">
+            <h2 class="content-header-title"> <i class="icon-money"></i>  Controle Financeiro</h2>
+          </div>
+        </div>
+        <div class="content-body"><!-- Basic form layout section start -->
+        
+	        <div th:if="${successMessage != null}">
+			    <div class="alert alert-success" th:utext="${successMessage}"></div>
+			</div>
+			<div th:if="${errorMessage != null}">
+			    <div class="alert alert-danger" th:utext="${errorMessage}"></div>
+			</div>
+		
+		<section id="basic-form-layouts">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-header">
+							<h4 class="card-title" id="basic-layout-form">Cadastrar Item</h4>
+							<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+							<div class="heading-elements">
+								<ul class="list-inline mb-0">
+									<li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+									<li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="card-body collapse in">
+							<div class="card-block">
+								<div class="card-text">
+									<p>Texto para descrição de detalhes desse cadastro. </p>
+								</div>
+								<form class="form" th:action="@{/admin/cadastrar/item}" method="post">
+									<div class="form-body">
+										<h4 class="form-section"><i class="icon-ios-information"></i> Informações</h4>
+										<div class="row">
+											<div class="col-md-12">
+												<div class="form-group">
+													<label for="projectinput1">Nome</label>
+													<input type="text" id="projectinput1" class="form-control" placeholder="First Name" name="nome" required>
+												</div>
+											</div>
+										</div>
+		
+										<div class="form-group">
+											<label for="projectinput8">Descrição</label>
+											<textarea id="projectinput8" rows="5" class="form-control" name="descricao" placeholder="About Project" required></textarea>
+										</div>
+									</div>
+		
+									<div class="form-actions right">
+										<button type="reset" class="btn btn-warning mr-1">
+											<i class="icon-cross2"></i> Cancelar
+										</button>
+										<button type="submit" class="btn btn-primary mr-1">
+											<i class="icon-check2"></i> Salvar
+										</button>
+										<a href="/admin/itens" class="btn btn-min-width btn btn-info mr-1" role="button"><i class="icon-android-list"></i> Todos</a>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+		
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-header">
+							<h4 class="card-title" id="basic-layout-form">Cadastrar Categoria</h4>
+							<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+							<div class="heading-elements">
+								<ul class="list-inline mb-0">
+									<li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+									<li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="card-body collapse in">
+							<div class="card-block">
+								<div class="card-text">
+									<p>Texto para descrição de detalhes desse cadastro. </p>
+								</div>
+								<form class="form" th:action="@{/admin/cadastrar/tipo}" method="post">
+									<div class="form-body">
+										<h4 class="form-section"><i class="icon-ios-information"></i> Informações</h4>
+										
+										<div class="form-group">
+											<label for="projectinput1">Nome</label>
+											<input type="text" id="projectinput1" class="form-control" placeholder="First Name" name="nome" required>
+										</div>
+										
+										<div class="form-group">
+											<label for="tagCategoria">Nome</label>
+											<input type="text" id="tagCategoria" class="form-control" placeholder="Tag" name="tag" required>
+										</div>
+										
+										<div class="form-group">
+											<label>Tipo</label>
+											<div class="input-group">
+												<label class="display-inline-block custom-control custom-radio ml-1">
+													<input type="radio" name="tipo.id" class="custom-control-input" value="1">
+													<span class="custom-control-indicator"></span>
+													<span class="custom-control-description ml-0">Receita</span>
+												</label>
+												<label class="display-inline-block custom-control custom-radio">
+													<input type="radio" name="tipo.id" checked="checked" value="2" class="custom-control-input">
+													<span class="custom-control-indicator"></span>
+													<span class="custom-control-description ml-0">Despesa</span>
+												</label>
+											</div>
+										</div>
+		
+										<div class="form-group">
+											<label for="projectinput8">Descrição</label>
+											<textarea id="projectinput8" rows="5" class="form-control" name="descricao" placeholder="About Project" required></textarea>
+										</div>
+									</div>
+		
+									<div class="form-actions right">
+										<button type="reset" class="btn btn-warning mr-1">
+											<i class="icon-cross2"></i> Cancelar
+										</button>
+										<button type="submit" class="btn btn-primary mr-1">
+											<i class="icon-check2"></i> Salvar
+										</button>
+										<a href="/admin/categorias" class="btn btn-min-width btn btn-info mr-1" role="button"><i class="icon-android-list"></i> Todos</a>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+		<!--/*
+		
+			<div class="row match-height">
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-header">
+							<h4 class="card-title" id="basic-layout-form">Cadastrar Receita</h4>
+							<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+							<div class="heading-elements">
+								<ul class="list-inline mb-0">
+									<li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+									<li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="card-body collapse in">
+							<div class="card-block">
+								<div class="card-text">
+									<p>Texto para descrição de detalhes desse cadastro. </p>
+								</div>
+								<form class="form" th:action="@{/controle/cadastrar/movimento}" method="post" enctype="multipart/form-data" >
+
+									<div class="form-body">
+										<h4 class="form-section"><i class="icon-ios-information"></i> Informações</h4>
+										
+										<div class="form-group">
+											<label for="tipo_receita">Receita</label>
+											<select id="tipo_receita" name="categoria" class="form-control select2" required>
+													<option value="">Selecione...</option>
+													<option th:each="categoria : ${categorias}" th:if="${categoria.isReceita()}" th:value="${categoria.id}" th:text="${categoria.nome}"></option>	
+											</select>
+										</div>
+										
+										<div class="form-group">
+											<label for="valor_receita">Valor da Receita</label>
+											<div class="input-group">
+												<span class="input-group-addon">R$</span>
+												<input type="number" class="form-control square" min="1" step="any" name="valor" id="valor_receita" required/>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label for="data_receita">Data da Receita</label>
+											<div class="position-relative has-icon-left">
+												<input type="date" id="data_receita" class="form-control" name="data" required>
+												<div class="form-control-position">
+													<i class="icon-calendar5"></i>
+												</div>
+											</div>
+										</div>
+		
+										<div class="form-group">
+											<label for="itens_receita">Itens da Receita</label>
+											<select id="itens_receita" name="itens" class="form-control select2" multiple required>
+													<option value="">Selecione...</option>
+													<option th:each="item : ${itens}" th:value="${item.id}" th:text="${item.nome}"></option>	
+											</select>
+										</div>
+		
+										<div class="form-group">
+											<label for="comprovantes_receita">Selecione os Comprovantes</label>
+											<label id="projectinput7" class="file center-block">
+												<input type="file" name="comprovantes" id="comprovantes_receita" multiple>
+												<span class="file-custom"></span>
+											</label>
+										</div>
+		
+										<div class="form-group">
+											<label for="descricao_receita">Descrição da Receita</label>
+											<textarea id="descricao_receita" rows="5" class="form-control" name="descricao" placeholder="About Project"></textarea>
+										</div>
+									</div>
+		
+									<div class="form-actions right">
+										<button type="reset" class="btn btn-warning mr-1">
+											<i class="icon-cross2"></i> Cancelar
+										</button>
+										<button type="submit" class="btn btn-primary mr-1">
+											<i class="icon-check2"></i> Salvar
+										</button>
+										<a href="/controle/receitas" class="btn btn-min-width btn btn-info mr-1" role="button"><i class="icon-android-list"></i> Todos</a>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-header">
+							<h4 class="card-title" id="basic-layout-form">Cadastrar Despesa</h4>
+							<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+							<div class="heading-elements">
+								<ul class="list-inline mb-0">
+									<li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+									<li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="card-body collapse in">
+							<div class="card-block">
+								<div class="card-text">
+									<p>Texto para descrição de detalhes desse cadastro. </p>
+								</div>
+								<form class="form" th:action="@{/controle/cadastrar/movimento}" method="post" enctype="multipart/form-data" >
+
+									<div class="form-body">
+										<h4 class="form-section"><i class="icon-ios-information"></i> Informações</h4>
+										
+										<div class="form-group">
+											<label for="tipo_despesa">Despesa</label>
+											<select id="tipo_despesa" name="categoria" class="form-control select2" required>
+													<option value="">Selecione...</option>
+													<option th:each="categoria : ${categorias}" th:if="${!categoria.isReceita()}" th:value="${categoria.id}" th:text="${categoria.nome}"></option>	
+											</select>
+										</div>
+										
+										<div class="form-group">
+											<label for="valor_despesa">Valor da Despesa</label>
+											<div class="input-group">
+												<span class="input-group-addon">R$</span>
+												<input type="number" class="form-control square" min="1" step="any" name="valor" id="valor_despesa" required/>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label for="data_despesa">Data da Despesa</label>
+											<div class="position-relative has-icon-left">
+												<input type="date" id="data_despesa" class="form-control" name="data" required>
+												<div class="form-control-position">
+													<i class="icon-calendar5"></i>
+												</div>
+											</div>
+										</div>
+		
+										<div class="form-group">
+											<label for="itens_despesa">Itens da Despesa</label>
+											<select id="itens_despesa" name="itens" class="form-control select2" multiple required>
+													<option value="">Selecione...</option>
+													<option th:each="item : ${itens}" th:value="${item.id}" th:text="${item.nome}"></option>	
+											</select>
+										</div>
+		
+										<div class="form-group">
+											<label for="comprovantes_despesa">Selecione os Comprovantes</label>
+											<label id="projectinput7" class="file center-block">
+												<input type="file" name="comprovantes" id="comprovantes_despesa" multiple>
+												<span class="file-custom"></span>
+											</label>
+										</div>
+		
+										<div class="form-group">
+											<label for="descricao_receita">Descrição da Despesa</label>
+											<textarea id="descricao_receita" rows="5" class="form-control" name="descricao" placeholder="About Project"></textarea>
+										</div>
+									</div>
+		
+									<div class="form-actions right">
+										<button type="reset" class="btn btn-warning mr-1">
+											<i class="icon-cross2"></i> Cancelar
+										</button>
+										<button type="submit" class="btn btn-primary mr-1">
+											<i class="icon-check2"></i> Salvar
+										</button>
+										<a href="/controle/despesas" class="btn btn-min-width btn btn-info mr-1" role="button"><i class="icon-android-list"></i> Todos</a>
+									</div>
+									
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+		*/-->
+		
+		</section>
+		<!-- // Basic form layout section end -->
+        </div>
+      </div>
+    </div>
+
+<footer th:replace="fragments/footer :: content"> </footer>
+
+<div th:include="fragments/script :: content" th:remove="tag"></div>
+
+</body>
+</html>
+

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt" data-textdirection="ltr" class="loading">
+  
+<head th:include="fragments/head :: content"> </head>
+  
+  <body data-open="click" data-menu="vertical-menu" data-col="1-column" class="vertical-layout vertical-menu 1-column  blank-page blank-page">
+
+    <div class="app-content content container-fluid">
+      <div class="content-wrapper">
+        <div class="content-header row">
+        </div>
+        <div class="content-body">
+        	<section class="flexbox-container">
+			    <div class="col-md-4 offset-md-4 col-xs-10 offset-xs-1 box-shadow-2 p-0">
+					<div class="card border-grey border-lighten-3 px-2 py-2 m-0">
+						<div class="card-header no-border">
+							<div class="card-title text-xs-center">
+								<img src="/assets/images/logo/logo-dark.png" alt="branding logo">
+							</div>
+							<h6 class="card-subtitle line-on-side text-muted text-xs-center font-small-3 pt-2"><span>Cradastar Analista</span></h6>
+							
+						</div>
+						<div class="card-body collapse in">	
+							<div class="card-block">
+							
+								<div th:if="${successMessage != null}">
+								    <div class="alert alert-success" 
+								    	th:utext="${successMessage}"></div>
+								</div>
+							
+								<form class="form-horizontal form-simple" th:action="@{/admin/cadastrar}" method="post" th:object="${user}">
+									<fieldset class="form-group position-relative has-icon-left mb-1">
+										<label class="danger" for="login" th:if="${#fields.hasErrors('login')}" th:errors="*{login}"> </label>
+										<input type="text" id="login" class="form-control form-control-lg input-lg" name="login" th:field="*{login}" placeholder="User Name">
+										<div class="form-control-position">
+										    <i class="icon-head"></i>
+										</div>
+									</fieldset>
+									<fieldset class="form-group position-relative has-icon-left mb-1">
+										<label class="danger" for="email" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"> </label>
+										<input type="email" class="form-control form-control-lg input-lg" id="email" name="email" th:field="*{email}" placeholder="Your Email Address" required>
+										<div class="form-control-position">
+										    <i class="icon-mail6"></i>
+										</div>
+									</fieldset>
+									<fieldset class="form-group position-relative has-icon-left mb-1">
+										<label class="danger" for="contato" th:if="${#fields.hasErrors('contato')}" th:errors="*{contato}"> </label>
+										<input type="tel" id="contato" pattern="[0-9]{9}" class="form-control form-control-lg input-lg" name="contato" th:field="*{contato}" placeholder="Your Email Address" required>
+										<div class="form-control-position">
+										    <i class="icon-android-call"></i>
+										</div>
+									</fieldset>
+									<fieldset class="form-group position-relative has-icon-left">	
+										<label class="danger" for="senha" th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}"> </label>
+										<input type="password" class="form-control form-control-lg input-lg" id="senha" th:field="*{senha}" placeholder="Enter Password" required>
+										<div class="form-control-position">
+										    <i class="icon-key3"></i>
+										</div>
+									</fieldset>
+									<button type="submit" class="btn btn-primary btn-lg btn-block"><i class="icon-unlock2"></i> Cadastrar</button>
+								</form>
+							</div>
+							<p class="text-xs-center">Voltar para tela inicial? <a href="/admin" class="card-link">Home</a></p>
+						</div>
+					</div>
+				</div>
+			</section>
+        </div>
+      </div>
+    </div>
+    
+<div th:include="fragments/script :: content" th:remove="tag"></div>    
+    
+  </body>
+</html>

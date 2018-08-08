@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" lang="pt" data-textdirection="ltr" class="loading">
+
+<head th:include="fragments/head :: content"> </head>
+
+<body data-open="click" data-menu="vertical-menu" data-col="2-columns" class="nav-collapsed menu-collapsed vertical-layout vertical-menu 2-columns fixed-navbar">
+
+<nav th:replace="fragments/nav :: content"></nav>
+
+<div th:replace="fragments/menu :: content"></div>
+
+<div class="app-content content container-fluid">
+  <div class="content-wrapper">
+    
+    <div class="content-header row">
+    </div>
+    
+    <div class="content-body" style="min-height:514px"><!-- stats -->
+    	
+    	<div class="row">
+    		<div class="col-xs-12">
+					<div class="card">
+					<a data-action="collapse">
+						<div class="card-header">
+							<h4 class="card-title" id="basic-layout-form">Filtros</h4>
+							<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+							<div class="heading-elements">
+								<ul class="list-inline mb-0">
+									<li><a data-action="collapse"><i class="icon-plus4"></i></a></li>
+								</ul>
+							</div>
+						</div>
+						</a>
+						<div class="card-body collapse">
+							<div class="card-block">
+								<form class="form" th:object="${filtro}" th:action="@{/pesquisar}" method="get">
+									<div class="form-body">
+										<div class="row">
+											<div class="col-md-3">
+												<div class="form-group">
+													<label for="data_receita">Data da Inicial</label>
+													<div class="position-relative has-icon-left">
+														<input th:field="*{inicio}" type="date" id="data_inicio" class="form-control" name="inicio">
+														<div class="form-control-position">
+															<i class="icon-calendar5"></i>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="form-group">
+													<label for="data_receita">Data da Final</label>
+													<div class="position-relative has-icon-left">
+														<input th:field="*{fim}" type="date" id="data_fim" class="form-control" name="fim">
+														<div class="form-control-position">
+															<i class="icon-calendar5"></i>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="form-group" style="text-align:center;">
+													<label>Tipo</label>
+													<div class="input-group">
+														<label class="display-inline-block custom-control custom-radio ml-1">
+															<input th:field="*{tipo.id}" type="radio" name="tipo.id" class="custom-control-input" value="1">
+															<span class="custom-control-indicator"></span>
+															<span class="custom-control-description ml-0">Receita</span>
+														</label>
+														<label class="display-inline-block custom-control custom-radio">
+															<input th:field="*{tipo.id}" type="radio" name="tipo.id" checked="checked" value="2" class="custom-control-input">
+															<span class="custom-control-indicator"></span>
+															<span class="custom-control-description ml-0">Despesa</span>
+														</label>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="form-group" style="text-align:center;">
+													<label>Irregular</label>
+													<div class="input-group">
+														<label class="display-inline-block custom-control custom-radio ml-1">
+															<input th:field="*{regularidade}" type="radio" name="regularidade" class="custom-control-input" value="1">
+															<span class="custom-control-indicator"></span>
+															<span class="custom-control-description ml-0">Sim</span>
+														</label>
+														<label class="display-inline-block custom-control custom-radio">
+															<input th:field="*{regularidade}" type="radio" name="regularidade" checked="checked" value="3" class="custom-control-input">
+															<span class="custom-control-indicator"></span>
+															<span class="custom-control-description ml-0">Não</span>
+														</label>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="itens">Itens</label>
+													<select style="width: 100%" th:field="*{itens}" id="itens" name="itens" class="form-control select2" multiple>
+															<option th:each="item : ${itens}" th:value="${item.id}" th:text="${item.nome}"></option>	
+													</select>
+												</div>
+											</div>
+											<div class="col-md-6">
+											<div class="form-group">
+												<label for="categorias">Categorias</label>
+												<select style="width: 100%" th:field="*{categorias}" id="categorias" name="categorias" class="form-control select2" multiple>
+														<option th:each="categoria : ${categorias}" th:value="${categoria.id}" th:text="${categoria.nome}"></option>	
+												</select>
+											</div>
+										</div>
+										</div>
+									</div>
+		
+									<div class="form-actions right">
+										<button type="reset" class="btn btn-warning mr-1">
+											<i class="icon-cross2"></i> Cancelar
+										</button>
+										<button type="submit" class="btn btn-info mr-1">
+											<i class="icon-search4"></i> Pesquisar
+										</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>	
+    		</div>
+    	
+    
+			<div class="row">
+			    <div class="col-xs-12">
+			        <div class="card">
+			            <div class="card-header">
+			                <h4 class="card-title" > Resultado</h4>
+			                <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+			                <div class="heading-elements">
+			                    <ul class="list-inline mb-0">
+			                        <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+			                    </ul>
+			                </div>
+			            </div>
+			            <div class="card-body collapse in">
+			                <div class="table-responsive  altura-minima">
+			                    <table class="table mb-0">
+			                        <thead>
+			                            <tr>
+			                                <th>#</th>
+			                                <th>Categoria</th>
+			                                <th>Situação</th>
+			                                <th>Tipo</th>
+			                                <th>Valor</th>
+			                                <th>Data</th>
+			                                <th>Opções</th>
+			                            </tr>
+			                        </thead>
+			                        <tbody>
+			                            <tr th:each="item,iter : ${page.content}">
+			                                <th scope="row" th:text="${iter.index + 1 + (page.size * page.number) }"></th>
+											<td th:text="${item.categoria.nome}"></td>
+											<td><div class="tag" th:classappend="${item.irregular ? 'tag-danger' : 'tag-success'}" data-toggle="popover" th:data-content="${item.irregularidades()}" data-placement="top" data-html="true" data-trigger="hover" data-original-title="Irregularidades:" th:text="${item.irregular ? 'Irregular' : 'Suave'}"></div></td>
+											<td th:text="${item.tipo.nome}"></td>
+											<td th:text="${'R$ ' + #numbers.formatDecimal(item.valor, 1, 'POINT', 2, 'COMMA')}"></td>
+			                                <td th:text="${#dates.format(item.data, 'dd/MM/yyyy')}"></td>
+			                                <td>
+			                                	<div class="btn-group" style="width:190px;">
+			                                        <button type="button" th:disabled="${item.comprovantes == null || item.comprovantes.isEmpty()}" class="btn btn-outline-primary" th:onclick="${'comprovantes(' + item.id + ')'}">Comprovantes</button>
+			                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			                                            <span class="sr-only">Toggle Dropdown</span>
+			                                        </button>
+			                                        <div class="dropdown-menu">
+			                                            <a class="dropdown-item">Denunciar</a>
+			                                            <a sec:authorize="hasRole('ANALISTA')" class="dropdown-item" th:onclick="${'modalAtualizar(' + item.id + ')'}">Atualizar</a>
+			                                        </div>
+			                                    </div>
+		                                    </td>
+			                            </tr>
+			                        </tbody>
+			                    </table>
+			                    
+			                    <div th:if="${page.totalPages > 1}" class="text-xs-right md-3 mr-1" th:with="currentUrl=(${@currentUrlWithoutParam.apply('pagina')})">
+									<nav aria-label="Page navigation">
+										<ul class="pagination">
+											<li class="page-item" th:if="${!page.first}">
+												<a class="page-link hidden-phone" th:href="@{${currentUrl}(pagina=${page.number-1})}" aria-label="Previous">
+													<span aria-hidden="true">« Anterior</span>
+													<span class="sr-only">Previous</span>
+												</a>
+											</li>
+											
+											<li th:each="i:${#numbers.sequence(0,page.totalPages-1)}" th:if="${ i == page.number || ( i > page.number - 3 && i < page.number) || (i < page.number + 3 && i > page.number)}" class="page-item" th:classappend="${i == page.number} ? active : notActive">
+												<div th:if="${i > page.number - 3 && i < page.number && i == page.number - 2 && i != 0}" th:remove="tag">
+													<a class="page-link" th:if="${!page.first}" th:href="@{${currentUrl}(pagina=0)}" >1</a>
+													<a class="page-link" disabled>...</a>
+												</div>
+												<a class="page-link" th:href="@{${currentUrl}(pagina=${i})}" th:text="${i+1}"></a>
+												<div th:if="${i < page.number + 3 && i > page.number && i == page.number + 2 && i != page.totalPages-1}" th:remove="tag">
+													<a  class="page-link" disabled>...</a>
+													<a class="page-link" th:if="${!page.last}" th:href="@{${currentUrl}(pagina=${page.totalPages-1})}" th:text="${page.totalPages}"></a>
+												</div>
+											</li>
+										
+											
+											<li class="page-item hidden-phone" th:if="${!page.last}">
+												<a class="page-link" th:href="@{${currentUrl}(pagina=${page.number+1})}" aria-label="Next">
+													<span  aria-hidden="true">Próximo »</span>
+													<span class="sr-only">Next</span>
+												</a>
+											</li>
+										</ul>
+									</nav>
+								</div>
+								
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+
+        </div>
+      
+     </div>
+  </div>
+
+	<!-- Modal -->
+	<div class="modal fade text-xs-left" id="comprovantesModal" tabindex="-1" role="dialog" aria-labelledby="Comprovantes" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+			<h4 class="modal-title" id="myModalLabel2"><i class="icon-clipboard"></i> Comprovantes</h4>
+		  </div>
+		  <div class="modal-body">
+		  	<div class="row" id="comprovantesList"></div>
+			
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Fechar</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	
+	<!-- Modal -->
+	<div sec:authorize="hasRole('ANALISTA')" class="modal fade text-xs-left" id="atualizarModal" tabindex="-1" role="dialog" aria-labelledby="atualizarMovimento" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+			<h4 class="modal-title" id="myModalLabel2"><i class="icon-info"></i> Atualizar Informações</h4>
+		  </div>
+		  <form class="form" th:action="@{/controle/atualiza/movimento}" method="post" enctype="multipart/form-data">
+		  <div class="modal-body">
+			<div class="form-body" th:with="currentUrl=(${#httpServletRequest.requestURI + '?' + #strings.defaultString(#httpServletRequest.queryString, '')})">
+				<input id="idAtualizar" name="id" type="hidden">
+				<input name="url" type="hidden" th:value="${currentUrl}">
+				<div class="form-group">
+					<label for="categorias">Categorias</label>
+					<select style="width: 100%" id="categoriasAtualizar" name="categoria" class="form-control select2">
+							<option th:each="categoria : ${categorias}" th:value="${categoria.id}" th:data-tipo="${categoria.tipo.id}" th:text="${categoria.nome}"></option>	
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="itens">Itens</label>
+					<select style="width: 100%" id="itensAtualizar" name="itens" class="form-control select2" multiple>
+							<option th:each="item : ${itens}" th:value="${item.id}" th:text="${item.nome}"></option>	
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="comprovantes_receita">Selecione os Comprovantes</label>
+					<label id="projectinput7" class="file center-block">
+						<input type="file" name="comprovantes" accept="image/*" id="comprovantes" multiple>
+					</label>
+				</div>
+				<div class="form-group">
+					<label for="descricao_receita">Descrição</label>
+					<textarea rows="5" class="form-control" name="descricao" id="descricaoAtualizar" ></textarea>
+				</div>
+			</div>
+	  	  </div>
+		  <div class="modal-footer">
+			<button data-dismiss="modal" class="btn btn-warning mr-1">
+				<i class="icon-cross2"></i> Cancelar
+			</button>
+			<button type="submit" class="btn btn-success mr-1">
+				<i class="icon-check"></i> Salvar
+			</button>
+		  </div>
+		  </form>	
+		</div>
+	  </div>
+	</div>
+
+<footer th:replace="fragments/footer :: content"> </footer>
+
+<div th:include="fragments/script :: content" th:remove="tag"></div>
+
+<script type="text/javascript">
+
+	function comprovantes(movimento) {
+	    
+	    console.log(movimento);
+	    
+	    $('#comprovantesModal').modal('show');
+	    
+	    $('#comprovantesList').html('');
+	    
+	    var request = $.ajax({
+			url: "/comprovantes?movimento=" + movimento,
+			method: "GET",
+			dataType: "json"
+		});
+		
+		request.done(function(comprovantes){
+			
+			var html = '';
+		
+			$.each(comprovantes, function(i, c){
+				html = html + imagem(c);				
+			});
+			
+			$('#comprovantesList').html(html);
+			
+		});
+		
+		request.fail(function(jqXHR) {
+			console.log(jqXHR);
+		});
+	}
+	
+	function imagem(comprovante){
+	
+		var html = '<figure class="col-lg-3 col-md-6 col-xs-12" ><a data-fancybox="gallery" href="https://s3-us-west-2.amazonaws.com/elasticbeanstalk-us-west-2-318693850464/';
+		
+		html = html + comprovante.imagem;
+		
+		html = html + '" data-size="480x360"><img class="img-thumbnail img-fluid" src="https://s3-us-west-2.amazonaws.com/elasticbeanstalk-us-west-2-318693850464/';
+		
+		html = html + comprovante.imagem + '" /></a></figure>';
+		
+		return html;
+		
+	}
+	
+	function modalAtualizar(movimento){
+		
+		console.log(movimento);
+	    
+	    $('#atualizarModal').modal('show');
+	    
+	    var request = $.ajax({
+			url: "/controle/get?movimento=" + movimento,
+			method: "GET",
+			dataType: "json"
+		});
+		
+		request.done(function(movimento){
+			setForm(movimento);
+		});
+		
+		request.fail(function(jqXHR) {
+			console.log(jqXHR);
+		});
+		
+	}
+	
+	function setForm(movimento){
+		
+		console.log(movimento);
+		
+		$("#idAtualizar").val(movimento.id);
+		
+		$("textarea#descricaoAtualizar").val(movimento.descricao);
+		
+		$("#categoriasAtualizar").val(movimento.categoria.id);
+		
+		refreshSelect2('categoriasAtualizar');
+		
+		itensSelecionados(movimento.itens);
+		
+		disableCategorias(movimento);
+		
+	}
+	
+	function itensSelecionados(itens){
+		
+		var vals = []
+		
+		$.each(itens, function(i, item){
+			vals.push(item.id);		
+		});
+		
+		$("#itensAtualizar").val(vals);
+		
+		refreshSelect2('itensAtualizar');
+	
+	}
+	
+	function disableCategorias(movimento){
+		
+		$("#categoriasAtualizar option[data-tipo=" + movimento.tipo.id + "]").removeAttr('disabled');
+		
+		$("#categoriasAtualizar option[data-tipo!=" + movimento.tipo.id + "]").attr('disabled','disabled');
+	
+	}
+	
+	function refreshSelect2(id){
+		$("#" + id).select2("destroy");
+
+		$("#" + id).select2();
+	}
+	
+</script>
+
+</body>
+</html>

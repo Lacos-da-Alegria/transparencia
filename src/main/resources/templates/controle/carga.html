@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt" data-textdirection="ltr" class="loading">
+
+<head th:include="fragments/head :: content"> </head>
+
+<body data-open="click" data-menu="vertical-menu" data-col="2-columns" class="nav-collapsed menu-collapsed vertical-layout vertical-menu 2-columns fixed-navbar">
+
+<nav th:replace="fragments/nav :: content"></nav>
+
+<nav th:replace="fragments/menu :: content"></nav>
+
+    <div class="app-content content container-fluid">
+      <div class="content-wrapper">
+        <div class="content-body"><!-- Basic form layout section start -->
+	        
+	        <div th:if="${successMessage != null}">
+			    <div class="alert alert-success" th:utext="${successMessage}"></div>
+			</div>
+			<div th:if="${errorMessage != null}">
+			    <div class="alert alert-danger" th:utext="${errorMessage}"></div>
+			</div>
+
+		<section id="basic-form-layouts">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header">
+							<h4 class="card-title" id="basic-layout-form"><i class="icon-upload5"></i>  Carga de Extrato</h4>
+							<a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+							<div class="heading-elements">
+								<ul class="list-inline mb-0">
+									<li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+									<li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="card-body collapse in">
+							<div class="card-block">
+								<div class="card-text">
+									<p>Texto para descrição de detalhes desse cadastro. </p>
+								</div>
+								<form class="form" th:action="@{/admin/carga/movimentacao}" method="post" enctype="multipart/form-data">
+									<div class="form-body">
+										<h4 class="form-section"><i class="icon-ios-information"></i> Informações</h4>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="mesCarga">Mês</label>
+													<select id="mesCarga" name="mes" class="form-control select2" required>
+														<option value="">Selecione...</option>
+														<option value="01">Janeiro</option>
+														<option value="02">Feveiro</option>
+														<option value="03">Março</option>
+														<option value="04">Abril</option>
+														<option value="05">Maio</option>
+														<option value="06">Junho</option>
+														<option value="07">Julho</option>
+														<option value="08">Agosto</option>
+														<option value="09">Setembro</option>
+														<option value="10">Outubro</option>
+														<option value="11">Novembro</option>
+														<option value="12">Dezembro</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="cargaAno">Ano</label>
+													<input type="text" id="cargaAno" class="form-control" placeholder="Ano" name="ano" required>
+												</div>
+											</div>
+										</div>
+		
+										<div class="form-group">
+											<label for="arquivoCarga">Selecione os Carga</label>
+											<label id="arquivoCarga" class="file center-block">
+												<input type="file" name="carga" id="arquivoCarga">
+												<span class="file-custom"></span>
+											</label>
+										</div>
+									</div>
+		
+									<div class="form-actions right">
+										<button type="reset" class="btn btn-warning mr-1">
+											<i class="icon-cross2"></i> Cancelar
+										</button>
+										<button type="submit" class="btn btn-primary mr-1">
+											<i class="icon-check2"></i> Salvar
+										</button>
+										<a href="/admin/cargas" class="btn btn-min-width btn btn-info mr-1" role="button"><i class="icon-android-list"></i> Todos</a>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+		
+			</div>
+		
+		</section>
+		<!-- // Basic form layout section end -->
+        </div>
+      </div>
+    </div>
+
+<footer th:replace="fragments/footer :: content"> </footer>
+
+<div th:include="fragments/script :: content" th:remove="tag"></div>
+
+</body>
+</html>
+

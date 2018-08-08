@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="content" data-scroll-to-active="true" class="main-menu menu-fixed menu-light menu-accordion menu-shadow">
+    <!-- main menu content-->
+    <div class="main-menu-content">
+        <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
+            <li class="nav-item"><a href="/"><i class="icon-home3"></i><span data-i18n="nav.form_layouts.form_layout_basic" class="menu-title">Página Inicial</span></a>
+            </li>
+            <li class="nav-item"><a href="/pesquisar"><i class="icon-search4"></i><span data-i18n="nav.form_layouts.form_layout_basic" class="menu-title">Pesquisar</span></a>
+            </li>
+            <li sec:authorize="hasRole('ADMIN')" class="nav-item"><a href="/admin"><i class="icon-stats-dots"></i><span data-i18n="nav.form_layouts.form_layout_basic" class="menu-title">Controle Financeiro</span></a>
+            </li>
+            <li sec:authorize="hasRole('ADMIN')" class="nav-item"><a href="/admin/carga/movimentacao"><i class="icon-upload5"></i><span data-i18n="nav.form_layouts.form_layout_basic" class="menu-title">Carga de Extrato</span></a>
+            </li>
+            <li sec:authorize="hasRole('ADMIN')" class="nav-item"><a href="/admin/cadastrar"><i class="icon-user"></i><span data-i18n="nav.form_layouts.form_layout_basic" class="menu-title">Cadastrar Novo Analista</span></a>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+</html>

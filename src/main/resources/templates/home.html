@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" lang="pt" data-textdirection="ltr" class="loading">
+
+<head th:include="fragments/head :: content"> </head>
+
+<body data-open="click" data-menu="vertical-menu" data-col="2-columns" class="nav-collapsed menu-collapsed vertical-layout vertical-menu 2-columns fixed-navbar">
+
+<nav th:replace="fragments/nav :: content"></nav>
+
+<div th:replace="fragments/menu :: content"></div>
+
+<div class="app-content content container-fluid">
+  <div class="content-wrapper">
+    
+    <div class="content-header row">
+    </div>
+    
+    <div class="content-body" style="min-height:514px"><!-- stats -->
+      
+      <div class="row">
+        <div class="col-xl-3 col-lg-6 col-xs-12">
+        
+          <div class="card">
+            <div class="card-body">
+              <div class="card-block">
+                <div class="media">
+                  <div class="media-body text-xs-left">
+                    <h3 class="info" th:text="${'R$ ' + #numbers.formatDecimal(home.caixa, 1, 'POINT', 2, 'COMMA')}"></h3>
+                    <span>Caixa Atual</span>
+                  </div>
+                  <div class="media-right media-middle">
+                    <i class="icon-shop2 info font-large-2 float-xs-right"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer card-custom-footer">
+           		<a class="text-info" href="/pesquisar"> <i class="icon-info-circle"></i>  Mais Informações</a>
+           	</div>
+          </div>
+          
+        </div>
+        <div class="col-xl-3 col-lg-6 col-xs-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-block">
+                <div class="media">
+                  <div class="media-body text-xs-left">
+                    <h3 class="green" th:text="${'R$ ' + #numbers.formatDecimal(home.receita, 1, 'POINT', 2, 'COMMA')}"></h3>
+                    <span>Receitas</span>
+                  </div>
+                  <div class="media-right media-middle">
+                    <i style="margin-right:20px" class="icon-dollar green font-large-2 float-xs-right"></i>
+                  </div>
+                </div>
+				<span class="card-meses float-right">Últimos 3 meses</span>
+              </div>
+            </div>
+            <div class="card-footer card-custom-footer">
+           		<a class="text-info" th:href="${'/pesquisar?inicio=' + #dates.format(home.ultimoMes, 'yyyy-MM-dd') + '&tipo.id=1'}"> <i class="icon-info-circle"></i>  Mais Informações</a>
+           	</div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-xs-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-block">
+                <div class="media">
+                  <div class="media-body text-xs-left">
+                    <h3 class="orange" th:text="${'R$ ' + #numbers.formatDecimal(home.despesa, 1, 'POINT', 2, 'COMMA')}"></h3>
+                    <span>Despesas</span>
+                  </div>
+                  <div class="media-right media-middle">
+                    <i class="icon-diagram orange font-large-2 float-xs-right"></i>
+                  </div>
+                </div>
+                <span class="card-meses float-right">Últimos 3 meses</span>
+              </div>
+            </div>
+            <div class="card-footer card-custom-footer">
+           		<a class="text-info" th:href="${'/pesquisar?inicio=' + #dates.format(home.ultimoMes, 'yyyy-MM-dd') + '&tipo.id=2'}"> <i class="icon-info-circle"></i>  Mais Informações</a>
+           	</div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-xs-12">
+          <div class="card">
+            <div class="card-body" data-toggle="popover" data-content="São movimentações que ainda não foram categorizadas. Também são despesas que ainda não possuem comprovantes cadastrados e por último, qualquer um pode registrar uma irregularidade." data-placement="bottom" data-html="true" data-trigger="hover" data-original-title="O que ser uma Irregularidade?">
+              <div class="card-block">
+                <div class="media">
+                  <div class="media-body text-xs-left">
+                    <h3 class="red" th:text="${home.irregularidades}"></h3>
+                    <span>Irregularidades</span>
+                  </div>
+                  <div class="media-right media-middle">
+                    <i class="icon-warning2 red font-large-2 float-xs-right"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer card-custom-footer">
+           		<a class="text-info" href="/pesquisar?regularidade=1"> <i class="icon-info-circle"></i>  Mais Informações</a>
+           	</div>
+          </div>
+        </div>
+      </div>
+      <!--/ stats -->
+    </div>
+  </div>
+</div>
+
+<footer th:replace="fragments/footer :: content"> </footer>
+
+<div th:include="fragments/script :: content" th:remove="tag"></div>
+
+</body>
+</html>

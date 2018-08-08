@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt" data-textdirection="ltr" class="loading">
+
+<head th:include="fragments/head :: content"> </head>
+
+<body data-open="click" data-menu="vertical-menu" data-col="2-columns" class="nav-collapsed menu-collapsed vertical-layout vertical-menu 2-columns fixed-navbar">
+
+<nav th:replace="fragments/nav :: content"></nav>
+
+<nav th:replace="fragments/menu :: content"></nav>
+
+    <div class="app-content content container-fluid">
+      <div class="content-wrapper">
+		<div class="content-header row">
+		  <div class="content-header-left col-md-6 col-xs-12 mb-1"><a href="/controle">
+		    <h4 class="content-header-title"><i class="icon-android-arrow-back"></i> Voltar</h4></a>
+		  </div>
+		</div> 
+        <div class="content-body altura-minima">
+			<div class="row">
+			    <div class="col-xs-12">
+			        <div class="card altura-minima" >
+			            <div class="card-header">
+			                <h4 class="card-title">Itens Cadastrados</h4>
+			                <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+			                <div class="heading-elements">
+			                    <ul class="list-inline mb-0">
+			                        <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+			                    </ul>
+			                </div>
+			            </div>
+			            <div class="card-body collapse in">
+			                <div class="table-responsive">
+			                    <table class="table mb-0">
+			                        <thead>
+			                            <tr>
+			                                <th>#</th>
+			                                <th>Item</th>
+			                                <th>Situação</th>
+			                                <th>Opções</th>
+			                            </tr>
+			                        </thead>
+			                        <tbody>
+			                            <tr th:each="item,iter : ${page.content}">
+			                                <th scope="row" th:text="${iter.index + 1 + (page.size * page.number) }"></th>
+			                                <td th:text="${item.nome}"></td>
+			                                <td><div class="tag" th:classappend="${item.status.tag()}" th:text="${item.status.nome}"></div></td>
+			                                <td>
+			                                	<div class="btn-group mr-1 mb-1">
+			                                        <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-eye6"></i></button>
+			                                        <div class="dropdown-menu">
+			                                            <a class="dropdown-item" href="#">Excluir</a>
+			                                        </div>
+			                                    </div>
+		                                    </td>
+			                            </tr>
+			                        </tbody>
+			                    </table>
+			                    
+			                    <div th:if="${page.totalPages > 1}" class="text-xs-right md-3 mr-1">
+									<nav aria-label="Page navigation">
+										<ul class="pagination">
+											<li class="page-item" th:if="${!page.first}">
+												<a class="page-link" th:href="${'/admin/itens?pagina='+ (page.number-1)}" aria-label="Previous">
+													<span aria-hidden="true">« Anterior</span>
+													<span class="sr-only">Previous</span>
+												</a>
+											</li>
+											
+											<li th:each="i:${#numbers.sequence(0,page.totalPages-1)}" class="page-item" th:classappend="${i == page.number} ? active : notActive"><a class="page-link" th:href="${'/admin/itens?pagina='+i}" th:text="${i+1}"></a></li>
+										
+											
+											<li class="page-item" th:if="${!page.last}">
+												<a class="page-link" th:href="${'/admin/itens?pagina='+ (page.number+1)}" aria-label="Next">
+													<span aria-hidden="true">Próximo »</span>
+													<span class="sr-only">Next</span>
+												</a>
+											</li>
+										</ul>
+									</nav>
+								</div>
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+
+        </div>
+      </div>
+    </div>
+
+
+<footer th:replace="fragments/footer :: content"> </footer>
+
+<div th:include="fragments/script :: content" th:remove="tag"></div>
+
+</body>
+</html>

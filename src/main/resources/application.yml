@@ -1,0 +1,31 @@
+spring:
+  thymeleaf:
+    cache: false
+  datasource:
+    url: jdbc:mysql://localhost:3306/trans?useSSL=false
+    username: user
+    password: password
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    hibernate:  
+      ddl-auto: update
+  queries:
+    users-query: select login, senha, 1 from user where login=?
+    roles-query: select u.login, r.role from user u inner join user_roles ur on(u.id=ur.user_id) inner join role r on(ur.roles_id=r.id) where u.login=?
+  mail:
+    host: smtp.gmail.com
+    port: 465
+    username: contao@email.com
+    password: password
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true  
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory     
+server:
+  port: 8080

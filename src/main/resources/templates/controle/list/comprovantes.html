@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt" data-textdirection="ltr" class="loading">
+
+<head th:include="fragments/head :: content"> </head>
+
+<body data-open="click" data-menu="vertical-menu" data-col="2-columns" class="nav-collapsed menu-collapsed vertical-layout vertical-menu 2-columns fixed-navbar">
+
+<nav th:replace="fragments/nav :: content"></nav>
+
+<nav th:replace="fragments/menu :: content"></nav>
+
+<div class="app-content content container-fluid">
+    
+<section id="image-gallery" class="card">
+  <div class="card-header">
+    <h4 class="card-title"><a th:href="${'/controle/' + (financeiro.tipo.receita ? 'receitas' : 'despesas')}">
+            <i class="icon-android-arrow-back"></i> Voltar</h2></a>
+    </h4>
+    <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+        <div class="heading-elements">
+          <ul class="list-inline mb-0">
+              <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+          </ul>
+      </div>
+  </div>
+  <div class="card-body collapse in">
+      <div class="card-block">
+          <div class="card-text">
+            <p>Comprovantes da <span th:text="${financeiro.tipo.receita ? 'Receita' : 'Despesa'}"> </span>.</p>
+          </div>
+      </div>
+    <div class="card-block  my-gallery">
+      <div class="row">
+        <figure th:each="item : ${financeiro.comprovante}" class="col-lg-3 col-md-6 col-xs-12" >
+          <a data-fancybox="gallery" th:href="${item.URLS3 + item.imagem}" data-size="480x360">
+              <img class="img-thumbnail img-fluid" th:src="${item.URLS3 + item.imagem}" />
+          </a>
+        </figure>
+      </div>
+    </div>
+   </div>
+    <!--/ Image grid -->
+</section>
+
+</div>
+
+<footer th:replace="fragments/footer :: content"> </footer>
+
+<div th:include="fragments/script :: content" th:remove="tag"></div>
+
+</body>
+</html>
