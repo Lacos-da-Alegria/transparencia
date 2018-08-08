@@ -42,7 +42,9 @@
 						<div class="card-body collapse in">
 							<div class="card-block">
 								<div class="card-text">
-									<p>Texto para descrição de detalhes desse cadastro. </p>
+									<p>Cadastrar aqui itens que são comprados ou que geram receita para o laços. 
+									Exemplo seria, tinta de rosto, coletes, etc. Assim no futuro podendo ser relacionados 
+									quantificado os itens que geram gasto ou receita para o Laços da ALegria</p>
 								</div>
 								<form class="form" th:action="@{/admin/cadastrar/item}" method="post">
 									<div class="form-body">
@@ -51,14 +53,14 @@
 											<div class="col-md-12">
 												<div class="form-group">
 													<label for="projectinput1">Nome</label>
-													<input type="text" id="projectinput1" class="form-control" placeholder="First Name" name="nome" required>
+													<input type="text" id="projectinput1" class="form-control" placeholder="Nome do Item" name="nome" required>
 												</div>
 											</div>
 										</div>
 		
 										<div class="form-group">
 											<label for="projectinput8">Descrição</label>
-											<textarea id="projectinput8" rows="5" class="form-control" name="descricao" placeholder="About Project" required></textarea>
+											<textarea id="projectinput8" rows="5" class="form-control" name="descricao" placeholder="Descrição do Item" required></textarea>
 										</div>
 									</div>
 		
@@ -92,7 +94,8 @@
 						<div class="card-body collapse in">
 							<div class="card-block">
 								<div class="card-text">
-									<p>Texto para descrição de detalhes desse cadastro. </p>
+									<p>Forma de agrupar e categorizar gasto e receitas. Exemplo de categorias seria 
+									Gasto com Sistema, Gasto com Material, Receita Festa, etc.</p>
 								</div>
 								<form class="form" th:action="@{/admin/cadastrar/tipo}" method="post">
 									<div class="form-body">
@@ -100,12 +103,12 @@
 										
 										<div class="form-group">
 											<label for="projectinput1">Nome</label>
-											<input type="text" id="projectinput1" class="form-control" placeholder="First Name" name="nome" required>
+											<input type="text" id="projectinput1" class="form-control" placeholder="Nome da Categoria" name="nome" required>
 										</div>
 										
 										<div class="form-group">
-											<label for="tagCategoria">Nome</label>
-											<input type="text" id="tagCategoria" class="form-control" placeholder="Tag" name="tag" required>
+											<label for="tagCategoria">Tag</label>
+											<input type="text" id="tagCategoria" class="form-control" placeholder="Código do Extrato (Caso Exista)" name="tag" required>
 										</div>
 										
 										<div class="form-group">
@@ -126,7 +129,7 @@
 		
 										<div class="form-group">
 											<label for="projectinput8">Descrição</label>
-											<textarea id="projectinput8" rows="5" class="form-control" name="descricao" placeholder="About Project" required></textarea>
+											<textarea id="projectinput8" rows="5" class="form-control" name="descricao" placeholder="Descrição da Categoria" required></textarea>
 										</div>
 									</div>
 		
